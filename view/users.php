@@ -1,25 +1,14 @@
-<?php  
-//validando a session
-session_start();
-$nome_usuario = $_SESSION["nome_usuario"];
-$username_usuario = $_SESSION["username_usuario"];
-$usuario_id = $_SESSION["usuario_id"];
-if(!$nome_usuario)
-header('Location: ../index.php');
-?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
   <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SBG</title>
+    <title>Users | Tita</title>
 
     <!-- Bootstrap core CSS-->
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -39,7 +28,7 @@ header('Location: ../index.php');
 
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-      <a class="navbar-brand mr-1" href="#">SBG<br><span style="font-size: 12px;"><b><?= $nome_usuario ?></b></span></a>
+     <a class="navbar-brand mr-1" href="#">SBG<br><span style="font-size: 12px;"><b><?= $nome_usuario ?></b></span></a>
 
       <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
         <i class="fas fa-bars"></i>
@@ -55,6 +44,7 @@ header('Location: ../index.php');
 
       <!-- Navbar -->
       <ul class="navbar-nav ml-auto ml-md-0">
+        <div id="canto" style="border-radius: 8px; float: right; background-color: #FFFFFF"></div>
         <li class="nav-item dropdown no-arrow">
           <a class="nav-link dropdown-toggle" href="tutoriais.php"><i class="fas fa-question-circle" title="Central de ajuda"></i></a>
         </li>
@@ -82,12 +72,12 @@ header('Location: ../index.php');
      include("../model/config.php");
         $config = new Config();
         
-        $permissao1=$config->verifica_permissao($usuario_id, 1); //registros
-        $permissao2=$config->verifica_permissao($usuario_id, 2); //dashboard
-        $permissao3=$config->verifica_permissao($usuario_id, 3); //relatorios
-        $permissao4=$config->verifica_permissao($usuario_id, 4); //clientes
-        $permissao5=$config->verifica_permissao($usuario_id, 5); //monitor
-        $permissao11=$config->verifica_permissao($usuario_id, 11); //financas
+        $permissao1=$config->verifica_permissao($id_usuario, 1); //registros
+        $permissao2=$config->verifica_permissao($id_usuario, 2); //dashboard
+        $permissao3=$config->verifica_permissao($id_usuario, 3); //relatorios
+        $permissao4=$config->verifica_permissao($id_usuario, 4); //clientes
+        $permissao5=$config->verifica_permissao($id_usuario, 5); //monitor
+        $permissao11=$config->verifica_permissao($id_usuario, 11); //financas
       ?>
 
 
@@ -151,25 +141,32 @@ header('Location: ../index.php');
 
       </ul>
 
-      <div id="content-wrapper">
-        
-        <div style="margin-left: 400px; margin-top: 100px;">
-            <h3>Exclusão de categoria financeira </h3>
-           <?php 
-             $id_categoria = $_GET['id'];
-             //salto =  + 15920 - 350
-             $id_categoria = $id_categoria - 15920 + 350;
-           ?>
-           <h5>Tem certeza que deseja excluir?</h5>
+      <div id="content-wrapper" style="margin-left: 15px">
+        <div class="container-fluid">
+           <h3><i class="fas fa fa fa-id-card"></i> Novo usuário:</h3>
+          <form action="../controller/novo_usuario.php" method="POST">
+            <input type="text" class="form-control" name="nome" placeholder="Nome" required="required"><Br>
+            <input type="text" class="form-control" name="username" placeholder="Username" required="required"><Br>
+            <input type="text" class="form-control" name="email" placeholder="E-mail"><Br>
+            <input type="password" class="form-control" name="senha" placeholder="Senha" required="required"><Br>
+            <input type="password" class="form-control" name="senha2" placeholder="Senha novamente" required="required"><br>
+            <input type="submit" class="form-control" value="Salvar" style="background-color: #ced4da;">
+          </form>
+          <br>
+              <a class="btn btn-primary" href="javascript:history.back(1)" ><i class="fas fa-fw fa fa  fa fa-reply"></i>
+            <span>Voltar</span></a>
 
-           <a class="nav-link" href="../controller/apaga_categoria.php?id=<?= $id_categoria ?>">
-            <i class="fas fa-fw fa fa-check"></i>
-           <span>Sim</span></a>
+        </div>
+        <!-- /.container-fluid -->
 
-           <a class="nav-link" href="categorias.php">
-            <i class="fas fa fa-times"></i>
-           <span>&nbsp;&nbsp;Não</span></a>
-       </div>
+        <!-- Sticky Footer -->
+        <footer class="sticky-footer">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Copyright © Barban 2019</span>
+            </div>
+          </div>
+        </footer>
 
       </div>
       <!-- /.content-wrapper -->
@@ -201,6 +198,32 @@ header('Location: ../index.php');
       </div>
     </div>
 
+    <!-- tentativa de criar um modal para cadastrar usuário !-->
+    <div class="modal fade" id="novoUsuario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Novo Usuário</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form name="cadastro" id="cadastro" method="post" action="">
+              <input style="border-radius: 8px" type="text" name="nome" placeholder="Nome">(*)<br>
+              <input style="border-radius: 8px" type="text" name="username" placeholder="Username">(*)<br>
+              <input style="border-radius: 8px" type="text" name="email" placeholder="E-mail"><br>
+              <input style="border-radius: 8px" type="password" name="senha" placeholder="Senha"><br>
+              <input style="border-radius: 8px" type="password" name="senha2" placeholder="Senha novamente"><br>
+              <input style="border-radius: 8px" type="submit" value="Salvar">
+            </form>
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Bootstrap core JavaScript-->
     <script src="../vendor/jquery/jquery.min.js"></script>
     <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -217,10 +240,13 @@ header('Location: ../index.php');
     <script src="../js/sb-admin.min.js"></script>
 
     <!-- Demo scripts for this page-->
-    <script src="../js/demo/datatables-demo.js"></script>
-    <script src="../js/demo/chart-area-demo.js"></script>
-
-
+    
+    <script type="text/javascript">
+      window.onload = function () {
+        setInterval("verifica_chat();", 500);
+      }
+    </script>
+    
   </body>
 
 </html>

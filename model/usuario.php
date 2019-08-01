@@ -1,47 +1,40 @@
 <?php  
 
-class usuario{
-
-	function __construct(){
-		include("../database/conexao.php");
+class usuario
+{
+	function __construct()
+	{
+		include("../database/crud.php");
 	}
 
-	public function verifica_usuario($username)
+	public function verifica_usuario($email)
 	{
-		session_start();
-
-		$conexao = new Conexao();
-		$pdo = new PDO('mysql:host='.$conexao->host.':'.$conexao->port.';dbname='.$conexao->dbname.'', ''.$conexao->user.'', ''.$conexao->password.'');
-
-		$busca = $pdo->query("SELECT * FROM usuarios WHERE usuario='".$usuario."';");
-		if($row = $busca->fetch()) 
-		{
+		$crud = new Crud();
+		$query = "SELECT * FROM users WHERE email='".$email."';";
+		$data = $crud->find($query);
+		if(count($data) > 0) {
 			return 1;			
-		}
-		else
-		{
+		} else {
 			return 0;
 		}
 	}
 
-	public function novo_usuario($nome, $username, $senha, $email, $empresa_id)
+	public function novo_usuario($name, $email)
 	{
-		$conexao = new Conexao();
-		$pdo = new PDO('mysql:host='.$conexao->host.':'.$conexao->port.';dbname='.$conexao->dbname.'', ''.$conexao->user.'', ''.$conexao->password.'');
-		$sql = "INSERT INTO usuarios (nome, usuario, senha, email, empresa_id) 
-		VALUES('".$nome."', '".$username."', '".$senha."', '".$email."', '".$empresa_id."')";
-		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$pdo->exec($sql);
+		$crud = new Crud();
+		$query = "INSERT INTO users (name, email) VALUES('".$name."', '".$email."')";
+		$crud->change($query);
 	}
 
 	public function lista_usuarios($empresa_id)
 	{
+		/*
 		$conexao = new Conexao();
 		$pdo = new PDO('mysql:host='.$conexao->host.':'.$conexao->port.';dbname='.$conexao->dbname.'', ''.$conexao->user.'', ''.$conexao->password.'');
 		$data = $pdo->query("SELECT * FROM usuarios WHERE empresa_id=".$empresa_id)->fetchAll();
-		return $data;
+		return $data; 
+		*/
 	}
-
 }
 
 ?>

@@ -6,22 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>About | Titã</title>
+    <title>Users | Titã</title>
   </head>
     <body style="background:#F0F8FF">
 
-    <center style="margin-top: 100px; font: italic bold 12px arial, sans-serif;">
+    <center style="margin-top: 100px; font: italic bold 12px 'Montserrat', sans-serif;">
       Titã
     </center>
 
-    <center style="font: italic bold 50px arial, sans-serif;">
+    <center style="font: italic bold 50px 'Montserrat', sans-serif;">
       1.0
     </center>
 
     <center style="margin-top: 100px; text-align: left; font: italic 15px arial, sans-serif;">
-     <!-- <ul>
+      <ul>
         <li><a href="users.php">Users</li>
-      </ul> -->
+      </ul>
     </center>
     <!-- Bootstrap core CSS-->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">

@@ -12,9 +12,9 @@ class user
 		$crud = new Crud();
 		$query = "SELECT * FROM users WHERE email='".$email."';";
 		$data = $crud->find($query);
-		if(count($data) > 0) {
+		if(count($data) > 0){
 			return 1;			
-		} else {
+		} else{
 			return 0;
 		}
 	}

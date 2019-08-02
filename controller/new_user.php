@@ -1,12 +1,12 @@
 <?php
 
-include("../model/usuario.php");
-$user = new Usuario();
+include("../model/user.php");
+$user = new User();
 
 $name = $_POST['name'];;
 $email = $_POST['email'];
 
-if($user->verifica_usuario($email))
+if($user->verify_user($email))
 {
 	echo ("<SCRIPT LANGUAGE='JavaScript'>
 	window.alert('Já existe um usuário com esse e-mail no sistema. Tente por favor com outro e-mail.')
@@ -16,7 +16,7 @@ if($user->verifica_usuario($email))
 
 else
 {
-	$user->novo_usuario($name, $email);
+	$user->new_user($name, $email);
 	echo ("<SCRIPT LANGUAGE='JavaScript'>
 	window.alert('Usuário cadastrado!')
 	window.location.href='../index.php';

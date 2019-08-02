@@ -10,7 +10,7 @@
   </head>
     <body style="background:#F0F8FF">
 
-    <form action="../controller/novo_usuario.php" method="post">
+    <form action="../controller/new_user.php" method="post">
         <input type="text" name="name" placeholder="Name..."><Br>
         <input type="text" name="email" placeholder="E-mail..."><Br>
         <input type="submit" value="Go">

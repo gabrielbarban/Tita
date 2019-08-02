@@ -1,13 +1,13 @@
 <?php  
 
-class usuario
+class user
 {
 	function __construct()
 	{
 		include("../database/crud.php");
 	}
 
-	public function verifica_usuario($email)
+	public function verify_user($email)
 	{
 		$crud = new Crud();
 		$query = "SELECT * FROM users WHERE email='".$email."';";
@@ -19,7 +19,7 @@ class usuario
 		}
 	}
 
-	public function novo_usuario($name, $email)
+	public function new_user($name, $email)
 	{
 		$crud = new Crud();
 		$query = "INSERT INTO users (name, email) VALUES('".$name."', '".$email."')";

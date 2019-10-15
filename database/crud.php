@@ -4,7 +4,7 @@ class Crud
 {
     function __construct()
 	{
-		include("connection.php");
+		require_once("connection.php");
 	}
 
 	public function find($query)

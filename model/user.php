@@ -4,7 +4,7 @@ class user
 {
 	function __construct()
 	{
-		include("../database/crud.php");
+		require_once("../database/crud.php");
 	}
 
 	public function verify_user($email)
